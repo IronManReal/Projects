@@ -1,0 +1,282 @@
+import java.util.Scanner;
+import java.util.stream.Stream;
+
+public class Xadrez_1 {
+
+	public static void main(String[] args) {
+	
+Scanner le = new Scanner(System.in);
+
+		String[][] main =  new String[8][8];
+	
+	    		
+		//Primeira parte(abre)
+		for(int v = 0; v <= 7; v++) {
+		    for(int p = 0; p <= 7; p++) {
+		    	
+		        if(v == 7) {
+		    	    main[v][p] = "a "+(p+1);
+		             }
+		    
+		    	if(v == 6) {
+				    main[v][p] = "b "+(p+1);
+				     }
+		    
+		    	if(v == 5) {
+				    main[v][p] = "c "+(p+1);
+				     }
+		    
+		    	if(v == 4) {
+				    main[v][p] = "d "+(p+1);
+				     }
+		    
+		    	if(v == 3) {
+				    main[v][p] = "e "+(p+1);
+				     }
+		    
+		    	if(v == 2) {
+				    main[v][p] = "f "+(p+1);
+				     }
+		    	
+		    	if(v == 1) {
+				    main[v][p] = "g "+(p+1);
+				     }
+		    	
+		    	if(v == 0) {
+				    main[v][p] = "h "+(p+1);
+				     }
+		    	
+		    	
+		    } 
+		    }
+		    //Primeira parte(fecha)
+		    
+		
+
+		//Segunda parte(abre)
+		int po = 7; 		
+		
+		for(int h = 0; h <= 7; h++) {
+				    for(int l = 0; l <= 7; l++) {
+
+				    	if((h == 0) && (l == 0)) {
+				    	    main[h][l] = "tb1";
+				             }
+				    
+				    	if((h == 0) && (l == 1)) {
+				    	    main[h][l] = "cb1";
+				             }
+				    	
+				    	if((h == 0) && (l == 2)) {
+				    	    main[h][l] = "bb1";
+				             }
+				    	
+				    	if((h == 0) && (l == 3)) {
+				    	    main[h][l] = "reb";
+				             }
+				    	
+				    	if((h == 0) && (l == 4)) {
+				    	    main[h][l] = "rab";
+				             }
+				    	
+				    	if((h == 0) && (l == 5)) {
+				    	    main[h][l] = "bb2";
+				             }
+				    	
+				    	if((h == 0) && (l == 6)) {
+				    	    main[h][l] = "cb2";
+				             }
+				    	
+				    	if((h == 0) && (l == 7)) {
+				    	    main[h][l] = "tb2";
+				             }
+				
+				    	if (h == 1){
+							main[h][l] = "pb"+(po - (l-1));
+						}
+				
+				    
+				   
+				    	if((h == 7) && (l == 0)) {
+				    	    main[h][l] = "tp1";
+				             }
+				    
+				    	if((h == 7) && (l == 1)) {
+				    	    main[h][l] = "cp1";
+				             }
+				    	
+				    	if((h == 7) && (l == 2)) {
+				    	    main[h][l] = "bp1";
+				             }
+				    	
+				    	if((h == 7) && (l == 3)) {
+				    	    main[h][l] = "rap";
+				             }
+				    	
+				    	if((h == 7) && (l == 4)) {
+				    	    main[h][l] = "rep";
+				             }
+				    	
+				    	if((h == 7) && (l == 5)) {
+				    	    main[h][l] = "bp2";
+				             }
+				    	
+				    	if((h == 7) && (l == 6)) {
+				    	    main[h][l] = "cp2";
+				             }
+				    	
+				    	if((h == 7) && (l == 7)) {
+				    	    main[h][l] = "tp2";
+				             }
+				
+				    	if (h == 6){
+							main[h][l] = "pp"+(l+1);
+						}
+				    
+				    
+				    }
+				}
+				//Segunda parte(fecha)
+			
+			
+			
+			
+
+				//Teste(abre)
+				for(int l = 0; l <= 7; l++) {
+				    for(int t = 0; t <= 7; t++) {
+				    	
+				    
+				    	System.out.print("|"+main[l][t] + "|");
+				    }
+				    
+				    System.out.println();
+			
+				}
+			
+				//Teste(fecha)
+			
+
+		
+		
+	//Teste de jogadas(abre)
+	            String jog = null;
+				String cas = null;
+				String cas1= null;
+				
+				
+				System.out.println("================================================================================");
+				System.out.println("Jogador 01(Peças brancas): "+ "\n"  +"--------------------------------"+ "\n" +"Escolha uma peça para jogar!"+ "\n"  +"--------------------------------");
+				jog = le.nextLine();
+				String jog1 = jog;
+
+				
+				for(int z = 0; z <= 7; z++) {
+				    for(int x = 0; x <= 7; x++) {
+				    
+				  if(jog.equals(main[z][x])) {
+						
+					  if(jog.equals("tb1") || jog.equals("cb1") || jog.equals("bb1") || jog.equals("reb") || jog.equals("rab") || jog.equals("bb2") || jog.equals("cb2") || jog.equals("tb2") || jog.equals("pb8") || jog.equals("pb7") || jog.equals("pb6") || jog.equals("pb5") || jog.equals("pb4") || jog.equals("pb3") || jog.equals("pb2") || jog.equals("pb1") ) {
+						  jog = "000";
+						  System.out.println("Escolha uma casa para jogar a peça escolhida");
+						 cas = le.nextLine();
+						String cas0 = cas; 
+					  char[] top = null;
+					  top = cas.toCharArray();
+					  
+					  String cas2 = top[0]+" "+top[1];
+					  System.out.println(cas2);
+				
+					  for(int z1 = 0; z1 <= 7; z1++) {
+						    for(int x1 = 0; x1 <= 7; x1++) {
+					  if(main[z1][x1].contentEquals(cas2)) {
+						
+						  main[z1][x1] = jog1;
+					    
+					    }
+						 
+					  if(main[z1][x1].contentEquals(cas0)) {
+							
+						  main[z1][x1] = jog1;
+					    
+					    }
+						    
+						    
+						    }
+					  }
+					  }//if gigante
+					  
+					  
+					  else {
+						  System.out.println("Escolha uma peça referente a sua cor!");
+					  }
+
+				  
+				  
+				  
+				  }
+				    
+				    
+				   
+				    
+				    
+				    }
+				}
+				
+				
+				//Teste(abre)
+				for(int l1 = 0; l1 <= 7; l1++) {
+				    for(int t1 = 0; t1 <= 7; t1++) {
+				    	
+				    
+				    	System.out.print("|"+main[l1][t1] + "|");
+				    }
+				    
+				    System.out.println();
+			
+				}
+			
+				//Teste(fecha)
+			
+			
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}					    	
+	}
+
+	
+
+
