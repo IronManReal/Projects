@@ -1,0 +1,33 @@
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class Imagem {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+
+
+        
+        
+        String img1 = "C:\\\\Users\\Usuário\\\\Desktop\\\\Área de Trabalho\\\\lobin1.png";
+        
+        String img2 = "C:\\\\Users\\Usuário\\\\Desktop\\\\Área de Trabalho\\\\Kaori.png";
+        
+        JFrame frame=new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(900,900);
+        frame.setVisible(true);
+        
+
+        
+        frame.getContentPane().add(new JLabel(new ImageIcon(img1)));
+        
+
+    
+    }
+
+
+}
+
+
