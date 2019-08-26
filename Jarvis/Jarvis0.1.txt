@@ -1,0 +1,188 @@
+import random
+import androidhelper
+import time
+import os
+import android
+import sl4a
+import sys
+
+	
+sim=["sim", "com certeza", "claro que sim", "claro", "óbvio que sim", "óbvio"]
+nao=["não", "com certeza não", "claro que não", "óbvio que não"]
+hora=["que horas são", "hora", "que horas são jarvis"]
+cumprimento=["olá", "olá jarvis", "oi", "oi jarvis", "bom dia", "bom dia jarvis", "boa tarde", "boa tarde jarvis", "boa noite", "boa noite jarvis", "e aí mano", "fala jarvis"]
+sair=["sair", "encerrar programa", "encerrar", "desligar"]
+cond = True
+cont = 0
+
+
+
+droid = androidhelper.Android()
+
+message = droid.dialogGetInput('Qual é o seu nome?', 'Digite aqui').result
+droid.ttsSpeak("Olá "+message+ ", me chamo Jarvis e estou ao seu dispor")
+time.sleep(3)
+
+
+(id,result,error)=droid.recognizeSpeech("Fale")
+result = result.lower()
+lista=["Olá "+message, "Oi "+message, "E aí "+message, "Fala "+message]
+
+
+comp=('/Entrada.txt')
+
+os.chdir('/storage/emulated/0/qpython/Jarvis/')
+caminho=os.getcwd()+comp
+
+arq = open(caminho, encoding='ISO-8859-1').readlines()                 
+one = 1
+for linha in arq:
+    linha = linha.rstrip()
+    if result in linha:
+       break
+    one = one+1
+
+
+
+arq1 = open('Saída.txt', encoding='ISO-8859-1').readlines()
+conde = 0
+for linha1 in arq1:
+   linha1 = linha1.rstrip()
+   conde = conde + 1
+   if conde == one:
+      break
+
+if conde == one: 
+   droid.ttsSpeak(linha1)
+   
+
+if 'executar' in result:
+   dois= '/storage/emulated/0/Download/'
+   tres= result.replace('executar música ', '')
+   Droid = androidhelper.Android()
+   quatro = dois+tres+'.mp3'
+   play = str()
+
+   cinco = Droid.mediaPlay(quatro).result
+
+if (result in hora): droid.ttsSpeak(time.strftime("%I %M %p"))
+
+
+if(result in cumprimento): droid.ttsSpeak(random.choice(lista))
+
+
+if(result in sair): droid.ttsSpeak("Desligando sistema"), exit()
+total=[hora, cumprimento, sair]
+
+if not result in hora: cont = cont+1
+if not result in cumprimento: cont = cont+1
+if not result in sair: cont = cont+1
+if not result in linha: cont = cont+1
+if not 'executar' in result: cont = cont + 1
+if(cont == 5): 
+   droid.ttsSpeak("Desculpe, não tenho resposta para isso. Gostaria de criar uma resposta???")
+   time.sleep(5)
+   (id, result, error)=droid.recognizeSpeech("Fale")
+   if(result in sim):
+      droid.ttsSpeak("Repita a pergunta")
+      time.sleep(4)
+      (id, result, error)=droid.recognizeSpeech("Fale")
+      result = result.lower()
+      with open('Entrada.txt', 'a', encoding='ISO-8859-1') as arq2:
+         arq2.write('\n')
+         arq2.write(result)
+         arq2.write('\n')
+      droid.ttsSpeak("Fale a resposta")
+      time.sleep(4)
+      (id, result, error)=droid.recognizeSpeech("Fale")
+      result = result.lower()
+      with open('Saída.txt', 'a', encoding='ISO-8859-1') as arq3:
+         arq3.write('\n')
+         arq3.write(result)
+         arq3.write('\n')
+      droid.ttsSpeak("Resposta gravada")
+         
+cont = 0
+         
+ 
+ 
+ 
+while(cond == True):
+   time.sleep(4)
+   (id,result,error)=droid.recognizeSpeech("Fale")
+   result = result.lower()
+
+   comp=('/Entrada.txt')
+
+   os.chdir('/storage/emulated/0/qpython/Jarvis/')
+   caminho=os.getcwd()+comp
+
+   arq = open(caminho, encoding='ISO-8859-1').readlines()                 
+   one = 1
+   for linha in arq:
+       linha = linha.rstrip()
+       if result in linha:
+          break
+       one = one+1
+
+
+
+   arq1 = open('Saída.txt', encoding='ISO-8859-1').readlines()
+   conde = 0
+   for linha1 in arq1:
+      linha1 = linha1.rstrip()
+      conde = conde + 1
+      if conde == one:
+         break
+
+   if conde == one: 
+      droid.ttsSpeak(linha1)
+   
+
+   if 'executar' in result:
+      dois= '/storage/emulated/0/Download/'
+      tres= result.replace('executar música ', '')
+      Droid = androidhelper.Android()
+      quatro = dois+tres+'.mp3'
+      play = str()
+
+      cinco = Droid.mediaPlay(quatro).result
+
+   if (result in hora): droid.ttsSpeak(time.strftime("%I %M %p"))
+
+
+   if(result in cumprimento): droid.ttsSpeak(random.choice(lista))
+
+
+   if(result in sair): droid.ttsSpeak("Desligando sistema"), exit()
+   total=[hora, cumprimento, sair]
+
+   if not result in hora: cont = cont+1
+   if not result in cumprimento: cont = cont+1
+   if not result in sair: cont = cont+1
+   if not result in linha: cont = cont+1
+   if not 'executar' in result: cont = cont + 1
+   if(cont == 5): 
+      droid.ttsSpeak("Desculpe, não tenho resposta para isso. Gostaria de criar uma resposta???")
+      time.sleep(5)
+      (id, result, error)=droid.recognizeSpeech("Fale")
+      if(result in sim):
+         droid.ttsSpeak("Repita a pergunta")
+         time.sleep(4)
+         (id, result, error)=droid.recognizeSpeech("Fale")
+         result = result.lower()
+         with open('Entrada.txt', 'a', encoding='ISO-8859-1') as arq2:
+            arq2.write('\n')
+            arq2.write(result)
+            arq2.write('\n')
+         droid.ttsSpeak("Fale a resposta")
+         time.sleep(4)
+         (id, result, error)=droid.recognizeSpeech("Fale")
+         result = result.lower()
+         with open('Saída.txt', 'a', encoding='ISO-8859-1') as arq3:
+            arq3.write('\n')
+            arq3.write(result)
+            arq3.write('\n')
+         droid.ttsSpeak("Resposta gravada")
+      
+   cont = 0
