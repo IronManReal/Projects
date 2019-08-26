@@ -1,0 +1,43 @@
+import xlrd
+import re
+cont = 0
+top = xlrd.open_workbook("C:/Users/victo/Desktop/top1.xlsx")
+num = top.nsheets
+
+for xe in range(num):
+    top1 = top.sheet_by_index(cont)
+
+    print("-------------------------------------------------------------")
+    print("Número de planilhas: {}".format(num))
+    print("-------------------------------------------------------------")
+    name = "".join(top1.name)
+    print("Nome da planilha: {}".format(name))
+    print("-------------------------------------------------------------")
+    print("A planilha {} tem {} linhas e {} colunas.".format(top1.name, top1.nrows, top1.ncols))
+    print("-------------------------------------------------------------")
+
+    name1 = name + (".txt")
+
+    p = re.compile(r'\s+')
+    name2 = re.sub(p, "", name1)
+
+    print(name2)
+    print("-------------------------------------------------------------")
+    loc = "C:/Users/victo/Desktop/" + name2
+
+    for rx in range(top1.nrows):
+
+        kirito = top1.row_values(rx)
+        asuna = " ".join(top1.row_values(rx))
+
+        arq = open(loc, 'a')
+        arq.write(asuna + '\n')
+        print(asuna)
+
+        arq.close()
+
+    cont = cont + 1
+
+
+
+
